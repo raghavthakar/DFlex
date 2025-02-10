@@ -1,0 +1,90 @@
+Meta:
+  num_objs: 1  # Two objectives
+
+Environment:
+  dimensions: [20, 20]
+  ep_length: 25
+  timestep_penalty: 0
+  global_reward_mode: "Aggregated"   # Reward can be scored at every timestep
+  local_reward_mode: "exponential"   # (Used mostly if you look at local rewards, but not crucial)
+  local_reward_kneecap: 10.0
+  local_reward_temp: 2
+  observation_mode: 'density'
+  average_density_readings: False # Average or aggregate the density measurements in the sector?
+  poi_obs_temp: 2
+  agent_obs_temp: 2
+  include_location_in_obs: False     # Agents do NOT see their own absolute position
+
+  # POIs: each must be within 'radius'=1, simultaneously with 3 rovers (coupling=3)
+  # to yield a reward of 1. Observations can be done at any timestep [0..14].
+  pois:
+    - obj: 0
+      location: [17, 17]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    
+    - obj: 0
+      location: [17, 3]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    
+    - obj: 0
+      location: [3, 3]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    
+    - obj: 0
+      location: [3, 17]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    
+    - obj: 0
+      location: [14, 14]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    
+    - obj: 0
+      location: [14, 6]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    
+    - obj: 0
+      location: [6, 6]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    
+    - obj: 0
+      location: [6, 14]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+
+Agents:
+  # Four rovers (the first dimension's length => 9 agents)
+  starting_locs: [[10, 10], [10, 10], [10, 10], [10, 10], [10, 10], [10, 10], [10, 10], [10, 10]]
+  num_sensors: [4, 4, 4, 4, 4, 4, 4, 4]
+  observation_radii: [5, 5, 5, 5, 5, 5, 5, 5]       # They can "see" POIs up to distance 5
+  max_step_sizes: [1, 1, 1, 1, 1, 1, 1, 1]   # Slows movement, requiring careful planning
