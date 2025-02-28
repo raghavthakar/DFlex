@@ -7,4 +7,4 @@ Policy:
 
 Evolutionary:
   pop_size: 200
-  num_gens: 50000
+  num_gens: 1000

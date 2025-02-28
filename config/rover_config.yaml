@@ -1,39 +1,24 @@
 Meta:
-  num_objs: 1  # Two objectives
+  num_objs: 1  # Single objective
 
 Environment:
-  dimensions: [20, 20]
+  dimensions: [25, 25]
   ep_length: 25
   timestep_penalty: 0
-  global_reward_mode: "Aggregated"   # Reward can be scored at every timestep
-  local_reward_mode: "exponential"   # (Used mostly if you look at local rewards, but not crucial)
+  global_reward_mode: "Aggregated"
+  local_reward_mode: "exponential"
   local_reward_kneecap: 10.0
   local_reward_temp: 2
   observation_mode: 'density'
-  average_density_readings: False # Average or aggregate the density measurements in the sector?
+  average_density_readings: False
   poi_obs_temp: 2
   agent_obs_temp: 2
-  include_location_in_obs: False     # Agents do NOT see their own absolute position
+  include_location_in_obs: False
 
-  # POIs: each must be within 'radius'=1, simultaneously with 3 rovers (coupling=3)
-  # to yield a reward of 1. Observations can be done at any timestep [0..14].
   pois:
-    - obj: 0
-      location: [17, 17]
-      radius: 0.5
-      coupling: 1
-      obs_window: [0, 100]
-      reward: 1
-      repeat: False
-    
-    - obj: 0
-      location: [17, 3]
-      radius: 0.5
-      coupling: 1
-      obs_window: [0, 100]
-      reward: 1
-      repeat: False
-    
+    # 5x5 grid positions with coordinates: [3, 8, 13, 18, 23]
+    # Omitting the center position (13, 13)
+    # Row y = 3
     - obj: 0
       location: [3, 3]
       radius: 0.5
@@ -41,41 +26,170 @@ Environment:
       obs_window: [0, 100]
       reward: 1
       repeat: False
-    
     - obj: 0
-      location: [3, 17]
+      location: [8, 3]
       radius: 0.5
       coupling: 1
       obs_window: [0, 100]
       reward: 1
       repeat: False
-    
     - obj: 0
-      location: [14, 14]
+      location: [13, 3]
       radius: 0.5
       coupling: 1
       obs_window: [0, 100]
       reward: 1
       repeat: False
-    
     - obj: 0
-      location: [14, 6]
+      location: [18, 3]
       radius: 0.5
       coupling: 1
       obs_window: [0, 100]
       reward: 1
       repeat: False
-    
     - obj: 0
-      location: [6, 6]
+      location: [23, 3]
       radius: 0.5
       coupling: 1
       obs_window: [0, 100]
       reward: 1
       repeat: False
-    
+
+    # Row y = 8
     - obj: 0
-      location: [6, 14]
+      location: [3, 8]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [8, 8]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [13, 8]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [18, 8]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [23, 8]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+
+    # Row y = 13 (skip [13, 13])
+    - obj: 0
+      location: [3, 13]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [8, 13]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [18, 13]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [23, 13]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+
+    # Row y = 18
+    - obj: 0
+      location: [3, 18]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [8, 18]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [13, 18]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [18, 18]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [23, 18]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+
+    # Row y = 23
+    - obj: 0
+      location: [3, 23]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [8, 23]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [13, 23]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [18, 23]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [23, 23]
       radius: 0.5
       coupling: 1
       obs_window: [0, 100]
@@ -83,8 +197,8 @@ Environment:
       repeat: False
 
 Agents:
-  # Four rovers (the first dimension's length => 9 agents)
-  starting_locs: [[10, 10], [10, 10], [10, 10], [10, 10], [10, 10], [10, 10], [10, 10], [10, 10]]
+  starting_locs: [[13, 13], [13, 13], [13, 13], [13, 13],
+                  [13, 13], [13, 13], [13, 13], [13, 13]]
   num_sensors: [4, 4, 4, 4, 4, 4, 4, 4]
-  observation_radii: [5, 5, 5, 5, 5, 5, 5, 5]       # They can "see" POIs up to distance 5
-  max_step_sizes: [1, 1, 1, 1, 1, 1, 1, 1]   # Slows movement, requiring careful planning
+  observation_radii: [5, 5, 5, 5, 5, 5, 5, 5]
+  max_step_sizes: [1, 1, 1, 1, 1, 1, 1, 1]
