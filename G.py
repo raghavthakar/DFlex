@@ -1,21 +1,20 @@
 import random
-import numpy
 
 import Algorithm
 import Individual
 
-class D(Algorithm.CoevolutionaryAlgorithm):
+class G(Algorithm.CoevolutionaryAlgorithm):
     def __init__(self, alg_config_filename, domain_name, rover_config_filename, data_filename):
         super().__init__(alg_config_filename, domain_name, rover_config_filename, data_filename)
 
     def evolve(self, gen=0, traj_write_freq=100):
         print(gen)
-        """Evolve the population using D."""
+        """Evolve the population using G."""
         # Shuffle each subpopulation
         for subpop in self.pop:
             random.shuffle(subpop)
         team_fitnesses = [] # To store the multibjective team fitness of each eval
-        difference_evals = [[] for _ in range(self.team_size)] # To store the difference evals of each polcy (team_size*pop_size*num_objs)
+        policy_evals = [[] for _ in range(self.team_size)] # To store the evals of each polcy (team_size*pop_size*num_objs)
         # Perform rollout and assign fitness to each team
         for eval_idx in range(self.pop_size):
             # Pick policies at the eval_index across all subpopulations
@@ -24,7 +23,7 @@ class D(Algorithm.CoevolutionaryAlgorithm):
             trajectory, fitness_dict = self.interface.rollout(team_policy)
             self.glob_eval_counter += 1
             if len(fitness_dict) != self.num_objs:
-                raise ValueError(f"[D] Expected {self.num_objs} objectives, but got {len(fitness_dict)}.")
+                raise ValueError(f"[G] Expected {self.num_objs} objectives, but got {len(fitness_dict)}.")
             # Store fitness
             for f in fitness_dict:
                 fitness_dict[f] = -fitness_dict[f] # NOTE: The fitness sign is flipped to match Pygmo convention
@@ -40,29 +39,20 @@ class D(Algorithm.CoevolutionaryAlgorithm):
                 self.data_logger.add_data(key='trajectory', value=None)
             self.data_logger.write_data()
 
-            # Counterfactual eval of each policy in this team policy
+            # eval of each policy in this team policy
             for p_idx in range(len(team_policy)):
-                # Trajectory with this policy's experience excluded
-                cf_traj = [trajectory[i] for i in range(len(team_policy)) if i != p_idx]
-                cf_fitness_dict = self.interface.evaluate_trajectory(cf_traj)
-                for f in cf_fitness_dict:
-                    cf_fitness_dict[f] = -cf_fitness_dict[f] # NOTE: The fitness sign is flipped to match Pygmo convention
-                # Difference evalutions per-objective for this policy
                 objectives = sorted(fitness_dict.keys())
-                policy_d_vals = [fitness_dict[o] - cf_fitness_dict[o] for o in objectives]
-                # Append to corresponding subpop d values
-                difference_evals[p_idx].append(policy_d_vals)
+                policy_g_vals = [fitness_dict[o]for o in objectives]
+                # Append to corresponding subpop g values
+                policy_evals[p_idx].append(policy_g_vals)
                 
         # Sort each subpop according to difference evaluations
-        for subpop_idx, subpop_d_vals in enumerate(difference_evals):
-            sorted_indices = sorted(range(len(subpop_d_vals)), key=lambda i: subpop_d_vals[i][0])
-            # Arrange the policies in subpop according to this sorted order
-            sorted_subpop = []
-            for policy_idx in sorted_indices:
-                sorted_subpop.append(self.pop[subpop_idx][policy_idx])
-            sorted_subpop = sorted_subpop[: self.pop_size // 2]
+        for subpop_idx, subpop_g_vals in enumerate(policy_evals):
+            # Create a list of indices [0, 1, ..., len(subpop_g_vals)-1] sorted by the first objective value
+            sorted_indices = sorted(range(len(subpop_g_vals)), key=lambda i: subpop_g_vals[i][0])
+            sorted_subpop = [self.pop[subpop_idx][i] for i in sorted_indices]
             # Keep only the top half of each subpop
-            self.pop[subpop_idx] = sorted_subpop
+            self.pop[subpop_idx] = sorted_subpop[: self.pop_size // 2]
 
         # Offspring creation in each subpop
         for subpop_idx, subpop in enumerate(self.pop):
