@@ -7,13 +7,14 @@ import shutil # for file management
 
 import D
 import G
+import DFlex
 
 if __name__ == '__main__':
     assert len(sys.argv) == 9, "Correct usage: python alg_name domain_name data_dirpath alg_config env_config seed label traj_write_freq"
    
     # Process the command line args
     alg_name = sys.argv[1]
-    assert alg_name in ['d', 'g'], "Unrecognised alg_name"
+    assert alg_name in ['d', 'g', 'dflex'], "Unrecognised alg_name"
     domain_name = sys.argv[2]
     assert domain_name in ['rover'], 'Uncrecognised domain_name'
     data_dir = sys.argv[3]
@@ -54,6 +55,12 @@ if __name__ == '__main__':
                                 data_filename=data_filename,
                                 rover_config_filename=dest_env_config_filename)
     
+    if alg_name == 'dflex':
+        alg = DFlex.DFlex(alg_config_filename=dest_alg_config_filename,
+                                domain_name=domain_name,
+                                data_filename=data_filename,
+                                rover_config_filename=dest_env_config_filename)
+        
     # Run the algorithm
     for gen in range(alg.num_gens):
         alg.evolve(gen=gen, traj_write_freq=traj_write_freq)
