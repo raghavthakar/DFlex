@@ -42,9 +42,13 @@ class DFlex(Algorithm.CoevolutionaryAlgorithm):
 
             # Counterfactual eval of each policy in this team policy
             for p_idx in range(len(team_policy)):
-                # Trajectory with a random half of the team's experience excluded
-                excluded_indices = random.sample(range(len(team_policy)), len(team_policy) // 2)
-                cf_traj = [trajectory[i] for i in range(len(team_policy)) if i not in excluded_indices]
+                num_cf = len(team_policy) // self.num_cf_denom
+                if self.cf_random == False:
+                    cf_set = [index%len(team_policy) for index in range(p_idx-num_cf//2, num_cf+p_idx-num_cf//2)]
+                else:
+                    # Trajectory with random experiences excluded
+                    cf_set = random.sample(range(len(team_policy)), len(team_policy) // self.num_cf_denom)
+                cf_traj = [trajectory[i] for i in range(len(team_policy)) if i not in cf_set]
                 cf_fitness_dict = self.interface.evaluate_trajectory(cf_traj)
                 for f in cf_fitness_dict:
                     cf_fitness_dict[f] = -cf_fitness_dict[f] # NOTE: The fitness sign is flipped to match Pygmo convention
