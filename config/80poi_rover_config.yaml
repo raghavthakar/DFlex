@@ -1,0 +1,606 @@
+Meta:
+  num_objs: 1  # Single objective
+
+Environment:
+  dimensions: [25, 25]
+  ep_length: 25
+  timestep_penalty: 0
+  global_reward_mode: "Aggregated"
+  local_reward_mode: "exponential"
+  local_reward_kneecap: 10.0
+  local_reward_temp: 2
+  observation_mode: 'density'
+  average_density_readings: False
+  poi_obs_temp: 2
+  agent_obs_temp: 2
+  include_location_in_obs: False
+
+  pois:
+    # 9x9 grid with equal margins (2.5 on each side) using coordinates:
+    # [2.5, 5.0, 7.5, 10.0, 12.5, 15.0, 17.5, 20.0, 22.5]
+    # Exclude the center POI (12.5, 12.5)
+    # Row y = 2.5
+    - obj: 0
+      location: [2.5, 2.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [5.0, 2.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [7.5, 2.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [10.0, 2.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [12.5, 2.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [15.0, 2.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [17.5, 2.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [20.0, 2.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [22.5, 2.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+
+    # Row y = 5.0
+    - obj: 0
+      location: [2.5, 5.0]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [5.0, 5.0]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [7.5, 5.0]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [10.0, 5.0]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [12.5, 5.0]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [15.0, 5.0]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [17.5, 5.0]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [20.0, 5.0]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [22.5, 5.0]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+
+    # Row y = 7.5
+    - obj: 0
+      location: [2.5, 7.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [5.0, 7.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [7.5, 7.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [10.0, 7.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [12.5, 7.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [15.0, 7.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [17.5, 7.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [20.0, 7.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [22.5, 7.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+
+    # Row y = 10.0
+    - obj: 0
+      location: [2.5, 10.0]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [5.0, 10.0]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [7.5, 10.0]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [10.0, 10.0]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [12.5, 10.0]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [15.0, 10.0]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [17.5, 10.0]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [20.0, 10.0]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [22.5, 10.0]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+
+    # Row y = 12.5
+    - obj: 0
+      location: [2.5, 12.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [5.0, 12.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [7.5, 12.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [10.0, 12.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    # Skip the center POI at [12.5, 12.5]
+    - obj: 0
+      location: [15.0, 12.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [17.5, 12.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [20.0, 12.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [22.5, 12.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+
+    # Row y = 15.0
+    - obj: 0
+      location: [2.5, 15.0]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [5.0, 15.0]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [7.5, 15.0]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [10.0, 15.0]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [12.5, 15.0]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [15.0, 15.0]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [17.5, 15.0]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [20.0, 15.0]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [22.5, 15.0]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+
+    # Row y = 17.5
+    - obj: 0
+      location: [2.5, 17.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [5.0, 17.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [7.5, 17.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [10.0, 17.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [12.5, 17.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [15.0, 17.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [17.5, 17.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [20.0, 17.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [22.5, 17.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+
+    # Row y = 20.0
+    - obj: 0
+      location: [2.5, 20.0]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [5.0, 20.0]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [7.5, 20.0]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [10.0, 20.0]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [12.5, 20.0]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [15.0, 20.0]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [17.5, 20.0]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [20.0, 20.0]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [22.5, 20.0]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+
+    # Row y = 22.5
+    - obj: 0
+      location: [2.5, 22.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [5.0, 22.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [7.5, 22.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [10.0, 22.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [12.5, 22.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [15.0, 22.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [17.5, 22.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [20.0, 22.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+    - obj: 0
+      location: [22.5, 22.5]
+      radius: 0.5
+      coupling: 1
+      obs_window: [0, 100]
+      reward: 1
+      repeat: False
+
+Agents:
+  starting_locs: [[12.5, 12.5], [12.5, 12.5], [12.5, 12.5], [12.5, 12.5],
+                  [12.5, 12.5], [12.5, 12.5], [12.5, 12.5], [12.5, 12.5]]
+  num_sensors: [4, 4, 4, 4, 4, 4, 4, 4]
+  observation_radii: [10, 10, 10, 10, 10, 10, 10, 10]
+  max_step_sizes: [1, 1, 1, 1, 1, 1, 1, 1]
