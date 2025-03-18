@@ -41,13 +41,19 @@ class DFlex(Algorithm.CoevolutionaryAlgorithm):
             self.data_logger.write_data()
 
             # Counterfactual eval of each policy in this team policy
+            credited_indices = []
             for p_idx in range(len(team_policy)):
-                num_cf = len(team_policy) // self.num_cf_denom
-                if self.cf_random == False:
-                    cf_set = [index%len(team_policy) for index in range(p_idx-num_cf//2, num_cf+p_idx-num_cf//2)]
+                if p_idx in credited_indices:
+                    continue
+                if self.random_each_gen == False:
+                    cf_set = [index%len(team_policy) for index in range(p_idx - self.num_cf//2, self.num_cf + p_idx - self.num_cf//2)]
                 else:
-                    # Trajectory with random experiences excluded
-                    cf_set = random.sample(range(len(team_policy)), len(team_policy) // self.num_cf_denom)
+                    # Random set of num_cf-1 agents + the current agents
+                    unevaluated_indices = [x for x in range(len(team_policy)) if x not in credited_indices and x != p_idx]
+                    if len(unevaluated_indices) < self.num_cf-1:
+                        raise ValueError("Number of remaining unevalauted indicies less than cf replacements. Make sure num_cf is a factor of team size.")
+                    cf_set = random.sample((unevaluated_indices), self.num_cf-1)
+                    cf_set.append(p_idx)
                 cf_traj = [trajectory[i] for i in range(len(team_policy)) if i not in cf_set]
                 cf_fitness_dict = self.interface.evaluate_trajectory(cf_traj)
                 for f in cf_fitness_dict:
@@ -55,8 +61,15 @@ class DFlex(Algorithm.CoevolutionaryAlgorithm):
                 # Difference evalutions per-objective for this policy
                 objectives = sorted(fitness_dict.keys())
                 policy_d_vals = [fitness_dict[o] - cf_fitness_dict[o] for o in objectives]
-                # Append to corresponding subpop d values
-                difference_evals[p_idx].append(policy_d_vals)
+                # if agents do not share credit then assign unique credit to p_idx
+                if self.share_credit == False:
+                    # Append to corresponding subpop d values
+                    difference_evals[p_idx].append(policy_d_vals)
+                # if agents share credit then assign this credit to all agents in cf_set
+                else:
+                    for evalauated_idx in cf_set:
+                        difference_evals[evalauated_idx].append(policy_d_vals.copy())
+                        credited_indices.append(evalauated_idx) # Need not be evaluated again
                 
         # Sort each subpop according to difference evaluations
         for subpop_idx, subpop_d_vals in enumerate(difference_evals):

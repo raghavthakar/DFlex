@@ -10,5 +10,6 @@ Evolutionary:
   num_gens: 2000
 
 Counterfactual:
-  num_cf_denom: 5 # team size / num_cf_denom counterfactuals will be used
-  random: True
+  num_cf: 4
+  share_credit: True
+  random_each_gen: True

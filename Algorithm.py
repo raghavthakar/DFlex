@@ -54,5 +54,6 @@ class CoevolutionaryAlgorithm:
         """Load internal configuration."""
         self.pop_size = self.config_data['Evolutionary']['pop_size']
         self.num_gens = self.config_data['Evolutionary']['num_gens']
-        self.num_cf_denom = self.config_data['Counterfactual']['num_cf_denom']
-        self.cf_random  = self.config_data['Counterfactual']['random']
+        self.num_cf = self.config_data['Counterfactual']['num_cf']
+        self.share_credit = self.config_data['Counterfactual']['share_credit']
+        self.random_each_gen  = self.config_data['Counterfactual']['random_each_gen']
