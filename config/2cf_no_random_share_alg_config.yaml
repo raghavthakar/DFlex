@@ -12,4 +12,4 @@ Evolutionary:
 Counterfactual:
   num_cf: 2
   share_credit: True
-  random_each_gen: True
+  random_each_gen: False
