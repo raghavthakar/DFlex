@@ -43,6 +43,8 @@ class DFlex(Algorithm.CoevolutionaryAlgorithm):
             # Counterfactual eval of each policy in this team policy
             credited_indices = []
             for p_idx in range(len(team_policy)):
+                if self.share_credit == True and self.team_size%self.num_cf != 0:
+                    raise ValueError("For agents to share credit, team size must be divisibly by num_cf!.")
                 if p_idx in credited_indices:
                     continue
                 if self.random_each_gen == False:
@@ -53,7 +55,7 @@ class DFlex(Algorithm.CoevolutionaryAlgorithm):
                     if len(unevaluated_indices) < self.num_cf-1:
                         raise ValueError("Number of remaining unevalauted indicies less than cf replacements. Make sure num_cf is a factor of team size.")
                     cf_set = random.sample((unevaluated_indices), self.num_cf-1)
-                    cf_set.append(p_idx)
+                    cf_set.append(p_idx) # Current policy must be in the cf set
                 cf_traj = [trajectory[i] for i in range(len(team_policy)) if i not in cf_set]
                 cf_fitness_dict = self.interface.evaluate_trajectory(cf_traj)
                 for f in cf_fitness_dict:
