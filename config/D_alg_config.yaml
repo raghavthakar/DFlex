@@ -7,7 +7,7 @@ Policy:
 
 Evolutionary:
   pop_size: 200
-  num_gens: 4000
+  num_gens: 2000
 
 Counterfactual:
   num_cf: 1
